@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combi Mill Roll Pass Guide — TSLP Jamshedpur</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0D1117;
+  --surf:    #161B22;
+  --surf2:   #1C2330;
+  --surf3:   #21262D;
+  --border:  #2A3441;
+  --border2: #334155;
+  --blue:    #2E75B6;
+  --bluel:   #4A9FD4;
+  --blued:   #1A3F66;
+  --amber:   #E6A817;
+  --amberd:  #4A3500;
+  --amberl:  #FFF2CC;
+  --green:   #3FB950;
+  --greend:  #0D3B1A;
+  --greenl:  #AAFFBB;
+  --red:     #E05252;
+  --redd:    #3B1010;
+  --purp:    #9A5FD4;
+  --purpd:   #2A1450;
+  --purpl:   #E2D9F3;
+  --orange:  #E8700A;
+  --steel:   #8BA3BC;
+  --text:    #E6EDF3;
+  --textd:   #7D8FA3;
+  --textm:   #4A5568;
+  --mono:    'JetBrains Mono', monospace;
+  --sans:    'Inter', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
+
+/* ── VIEWS ── */
+.view { display: none; min-height: 100vh; }
+.view.active { display: block; }
+
+/* ── LOGIN ── */
+.login-wrap {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 24px;
+}
+.login-logo {
+  width: 64px; height: 64px; background: var(--blued);
+  border: 2px solid var(--blue); border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin-bottom: 20px;
+}
+.login-title { font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 4px; }
+.login-sub   { font-size: 12px; color: var(--textd); text-align: center; margin-bottom: 32px; }
+.login-card  {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px 24px; width: 100%; max-width: 380px;
+}
+.login-label { font-size: 11px; font-weight: 600; color: var(--textd);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+.login-input {
+  width: 100%; background: var(--bg); border: 1.5px solid var(--border2);
+  border-radius: 8px; color: var(--text); font-family: var(--mono);
+  font-size: 16px; padding: 12px 14px; outline: none; margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+.login-input:focus { border-color: var(--blue); }
+.pin-row { display: flex; gap: 10px; margin-bottom: 20px; }
+.pin-box {
+  flex: 1; background: var(--bg); border: 1.5px solid var(--border2);
+  border-radius: 8px; color: var(--text); font-family: var(--mono);
+  font-size: 22px; font-weight: 700; text-align: center;
+  padding: 12px 0; outline: none; transition: border-color 0.2s;
+}
+.pin-box:focus { border-color: var(--blue); }
+.btn-primary {
+  width: 100%; background: var(--blue); border: none; border-radius: 8px;
+  color: #fff; font-family: var(--sans); font-size: 15px; font-weight: 600;
+  padding: 13px; cursor: pointer; transition: background 0.15s;
+}
+.btn-primary:hover { background: var(--bluel); }
+.btn-primary:disabled { background: var(--border2); cursor: not-allowed; }
+.login-err {
+  background: var(--redd); border: 1px solid var(--red);
+  border-radius: 8px; padding: 10px 14px; color: var(--red);
+  font-size: 12px; margin-bottom: 14px; display: none;
+}
+.login-loading { text-align: center; color: var(--textd); font-size: 13px; padding: 8px; display: none; }
+
+/* ── HEADER (shared) ── */
+.app-header {
+  background: var(--surf); border-bottom: 1px solid var(--border);
+  padding: 14px 20px; display: flex; align-items: center; gap: 12px;
+  position: sticky; top: 0; z-index: 100;
+}
+.app-header-icon { font-size: 20px; }
+.app-header-title { font-size: 14px; font-weight: 700; }
+.app-header-sub   { font-size: 10px; color: var(--textd); margin-top: 1px; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.user-badge {
+  background: var(--surf2); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 11px; color: var(--textd); font-family: var(--mono);
+}
+.btn-logout {
+  background: var(--redd); border: 1px solid var(--red);
+  border-radius: 6px; color: var(--red); font-size: 11px;
+  font-weight: 600; padding: 4px 10px; cursor: pointer;
+}
+.admin-badge {
+  background: var(--amberd); border: 1px solid var(--amber);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 10px; color: var(--amber); font-weight: 700;
+}
+
+/* ── ADMIN PORTAL ── */
+.admin-wrap { max-width: 700px; margin: 0 auto; padding: 24px 16px; }
+.section-title {
+  font-size: 16px; font-weight: 700; margin-bottom: 4px;
+}
+.section-sub { font-size: 12px; color: var(--textd); margin-bottom: 20px; }
+
+.card {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; margin-bottom: 16px;
+}
+.card-title { font-size: 13px; font-weight: 700; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px; }
+
+.form-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.form-input {
+  flex: 1; min-width: 140px; background: var(--bg);
+  border: 1.5px solid var(--border2); border-radius: 8px;
+  color: var(--text); font-family: var(--mono); font-size: 14px;
+  padding: 10px 12px; outline: none;
+}
+.form-input:focus { border-color: var(--blue); }
+.btn-sm {
+  background: var(--blue); border: none; border-radius: 8px;
+  color: #fff; font-size: 13px; font-weight: 600;
+  padding: 10px 18px; cursor: pointer; white-space: nowrap;
+}
+.btn-sm:hover { background: var(--bluel); }
+.btn-danger {
+  background: transparent; border: 1px solid var(--red);
+  border-radius: 6px; color: var(--red); font-size: 11px;
+  padding: 4px 10px; cursor: pointer;
+}
+.btn-toggle {
+  background: transparent; border: 1px solid var(--border2);
+  border-radius: 6px; color: var(--textd); font-size: 11px;
+  padding: 4px 10px; cursor: pointer;
+}
+
+.user-list { display: flex; flex-direction: column; gap: 8px; }
+.user-row {
+  background: var(--surf2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 14px;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.user-phone { font-family: var(--mono); font-size: 13px; font-weight: 600; }
+.user-name  { font-size: 12px; color: var(--textd); }
+.user-active {
+  font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 10px; margin-left: auto;
+}
+.ua-yes { background: var(--greend); color: var(--green); border: 1px solid var(--green); }
+.ua-no  { background: var(--redd);   color: var(--red);   border: 1px solid var(--red); }
+.user-actions { display: flex; gap: 6px; }
+
+.msg-success {
+  background: var(--greend); border: 1px solid var(--green);
+  border-radius: 8px; padding: 10px 14px; color: var(--green);
+  font-size: 12px; margin-bottom: 12px; display: none;
+}
+.msg-err {
+  background: var(--redd); border: 1px solid var(--red);
+  border-radius: 8px; padding: 10px 14px; color: var(--red);
+  font-size: 12px; margin-bottom: 12px; display: none;
+}
+
+/* ── EMPLOYEE PORTAL ── */
+.emp-wrap { max-width: 900px; margin: 0 auto; padding: 20px 14px; }
+
+/* Section selector */
+.section-selector {
+  background: var(--surf); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; margin-bottom: 16px;
+}
+.sel-label { font-size: 10px; font-weight: 700; color: var(--textd);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+.sel-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+.dia-select {
+  flex: 1; min-width: 160px; background: var(--bg);
+  border: 1.5px solid var(--border2); border-radius: 8px;
+  color: var(--text); font-family: var(--mono); font-size: 16px;
+  padding: 11px 14px; outline: none; cursor: pointer;
+  appearance: none;
+}
+.dia-select:focus { border-color: var(--blue); }
+.btn-go {
+  background: var(--blue); border: none; border-radius: 8px;
+  color: #fff; font-family: var(--sans); font-size: 14px; font-weight: 600;
+  padding: 12px 24px; cursor: pointer;
+}
+.btn-go:hover { background: var(--bluel); }
+.btn-reset {
+  background: transparent; border: 1px solid var(--border2);
+  border-radius: 8px; color: var(--textd); font-size: 13px;
+  padding: 12px 16px; cursor: pointer;
+}
+
+/* Results */
+.result-banner {
+  background: linear-gradient(135deg, var(--blued), var(--purpd));
+  border: 1px solid var(--blue); border-radius: 12px;
+  padding: 16px 20px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.rb-arrow { font-size: 28px; color: var(--amber); }
+.rb-from, .rb-to { display: flex; flex-direction: column; }
+.rb-lbl { font-size: 9px; color: var(--textd); text-transform: uppercase; letter-spacing: 0.1em; }
+.rb-val { font-family: var(--mono); font-size: 24px; font-weight: 800; color: var(--text); }
+.rb-sub { font-size: 10px; color: var(--textd); margin-top: 2px; }
+
+/* Summary chips */
+.summary-row {
+  display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.sum-chip {
+  flex: 1; min-width: 120px; border-radius: 10px; padding: 10px 14px;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.sum-chip.same   { background: var(--greend); border: 1px solid var(--green); }
+.sum-chip.change { background: var(--redd);   border: 1px solid var(--red); }
+.sum-chip.bypass { background: var(--surf2);  border: 1px solid var(--border); }
+.sum-chip-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.sum-chip.same   .sum-chip-lbl { color: var(--green); }
+.sum-chip.change .sum-chip-lbl { color: var(--red); }
+.sum-chip.bypass .sum-chip-lbl { color: var(--textm); }
+.sum-chip-val { font-family: var(--mono); font-size: 18px; font-weight: 800; color: var(--text); }
+
+/* Stand tables */
+.stands-section { margin-bottom: 16px; }
+.stands-hdr {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px 10px 0 0;
+  border: 1px solid var(--border);
+}
+.stands-hdr.hv    { background: var(--blued); border-color: var(--blue); }
+.stands-hdr.kocks { background: var(--amberd); border-color: var(--amber); }
+.stands-hdr-title { font-size: 13px; font-weight: 700; }
+.stands-hdr-sub   { font-size: 11px; color: var(--textd); margin-left: auto; }
+
+.stands-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--surf); border: 1px solid var(--border);
+  border-top: none; border-radius: 0 0 10px 10px; overflow: hidden;
+}
+.stands-table th {
+  background: var(--surf2); padding: 8px 10px;
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--textd); text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.stands-table td {
+  padding: 8px 10px; text-align: center;
+  border-bottom: 1px solid var(--border2);
+  font-family: var(--mono); font-size: 12px;
+}
+.stands-table tr:last-child td { border-bottom: none; }
+.stands-table tr.row-same   td { background: rgba(63,185,80,0.05); }
+.stands-table tr.row-change td { background: rgba(224,82,82,0.07); }
+.stands-table tr.row-bypass td { opacity: 0.4; }
+
+.tag-same   { background: var(--greend); color: var(--green); border: 1px solid var(--green);
+  font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+.tag-change { background: var(--redd); color: var(--red); border: 1px solid var(--red);
+  font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+.tag-bypass { background: var(--surf2); color: var(--textm); border: 1px solid var(--border);
+  font-size: 9px; padding: 2px 7px; border-radius: 10px; }
+
+.groove-from { color: var(--textd); font-size: 11px; }
+.groove-to   { color: var(--text);  font-size: 13px; font-weight: 700; }
+.groove-arr  { color: var(--amber); font-size: 11px; }
+
+/* Kocks section */
+.kocks-section { margin-bottom: 16px; }
+
+@media (max-width: 600px) {
+  .emp-wrap  { padding: 14px 10px; }
+  .rb-val    { font-size: 18px; }
+  .stands-table td, .stands-table th { padding: 6px 6px; font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     VIEW 1: LOGIN
+══════════════════════════════════════════════════════════════ -->
+<div class="view active" id="viewLogin">
+  <div class="login-wrap">
+    <div class="login-logo">🏭</div>
+    <div class="login-title">Combi Mill Roll Pass Guide</div>
+    <div class="login-sub">TATA Steel Long Products Ltd · Jamshedpur</div>
+    <div class="login-card">
+      <div class="login-err" id="loginErr"></div>
+      <div class="login-loading" id="loginLoad" style="display:none;">Verifying...</div>
+      <div class="login-label">Phone Number</div>
+      <input class="login-input" type="tel" id="loginPhone"
+             placeholder="+91XXXXXXXXXX" maxlength="13">
+      <div class="login-label">4-Digit PIN</div>
+      <div class="pin-row">
+        <input class="pin-box" type="password" maxlength="1" id="p0" inputmode="numeric">
+        <input class="pin-box" type="password" maxlength="1" id="p1" inputmode="numeric">
+        <input class="pin-box" type="password" maxlength="1" id="p2" inputmode="numeric">
+        <input class="pin-box" type="password" maxlength="1" id="p3" inputmode="numeric">
+      </div>
+      <button class="btn-primary" id="loginBtn" onclick="doLogin()">Login</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     VIEW 2: ADMIN PORTAL
+══════════════════════════════════════════════════════════════ -->
+<div class="view" id="viewAdmin">
+  <div class="app-header">
+    <div class="app-header-icon">⚙</div>
+    <div>
+      <div class="app-header-title">Admin Portal</div>
+      <div class="app-header-sub">Combi Mill Roll Pass Guide</div>
+    </div>
+    <div class="header-right">
+      <span class="admin-badge">ADMIN</span>
+      <span class="user-badge" id="adminPhone">—</span>
+      <button class="btn-logout" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="admin-wrap">
+    <div class="section-title">User Management</div>
+    <div class="section-sub">Add or manage employee access to the Combi Mill Roll Pass Guide</div>
+
+    <!-- Add user -->
+    <div class="card">
+      <div class="card-title">➕ Add New User</div>
+      <div class="msg-success" id="addSuccess"></div>
+      <div class="msg-err" id="addErr"></div>
+      <div class="form-row">
+        <input class="form-input" type="tel" id="addPhone" placeholder="Phone (+91XXXXXXXXXX)">
+        <input class="form-input" type="text" id="addName" placeholder="Name (optional)">
+        <input class="form-input" type="text" id="addPin" placeholder="4-digit PIN" maxlength="4" inputmode="numeric">
+        <button class="btn-sm" onclick="addUser()">Add User</button>
+      </div>
+    </div>
+
+    <!-- User list -->
+    <div class="card">
+      <div class="card-title">👥 Active Users</div>
+      <div class="msg-success" id="listSuccess"></div>
+      <div class="msg-err" id="listErr"></div>
+      <div class="user-list" id="userList">
+        <div style="color:var(--textm);font-size:13px;text-align:center;padding:20px;">Loading...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     VIEW 3: EMPLOYEE PORTAL
+══════════════════════════════════════════════════════════════ -->
+<div class="view" id="viewEmployee">
+  <div class="app-header">
+    <div class="app-header-icon">🏭</div>
+    <div>
+      <div class="app-header-title">Combi Mill Roll Pass Guide</div>
+      <div class="app-header-sub">TATA Steel Long Products · Jamshedpur · WRM</div>
+    </div>
+    <div class="header-right">
+      <span class="user-badge" id="empPhone">—</span>
+      <button class="btn-logout" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="emp-wrap">
+    <!-- Section selector -->
+    <div class="section-selector">
+      <div class="sel-label">Section Change Setup</div>
+      <div class="sel-row">
+        <div style="flex:1;min-width:140px;">
+          <div style="font-size:11px;color:var(--textd);margin-bottom:6px;">Current Running Section (cold mm)</div>
+          <select class="dia-select" id="fromSection">
+            <option value="">Select current section</option>
+          </select>
+        </div>
+        <div style="font-size:20px;color:var(--textd);padding-bottom:10px;">→</div>
+        <div style="flex:1;min-width:140px;">
+          <div style="font-size:11px;color:var(--textd);margin-bottom:6px;">Upcoming Section (cold mm)</div>
+          <select class="dia-select" id="toSection">
+            <option value="">Select upcoming section</option>
+          </select>
+        </div>
+        <button class="btn-go" onclick="showGrooveChange()">Show Changes</button>
+        <button class="btn-reset" onclick="resetEmp()">Reset</button>
+      </div>
+    </div>
+
+    <!-- Results area -->
+    <div id="empResults" style="display:none;"></div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════════════════
+// CONFIG
+// ════════════════════════════════════════════════════════════════════════════
+const SUPA_URL = "https://dkpwssqsnghlbamhgcsn.supabase.co";
+const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrcHdzc3FzbmdobGJhbWhnY3NuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk5ODIxMjMsImV4cCI6MjA5NTU1ODEyM30.PUCLWuH2J_ob0lpVv_BSFPJjLNgpzrRYZggwlhQ-364";
+const ADMINS  = ["+919390052778", "+917541899043"];
+
+// ════════════════════════════════════════════════════════════════════════════
+// ROLL PASS DATA
+// H/V Mill: grooves per stand per feeder size range
+// Feeder sizes = cold finished diameter ranges going INTO Kocks
+// ════════════════════════════════════════════════════════════════════════════
+
+// Available sections (cold finished diameter after Kocks)
+// These map to feeder sizes from H/V mill
+const SECTIONS = [
+  { label: "5.5 – 6.0 mm",   cold: "5.5-6.0",   feeder: "5.5-6.0"   },
+  { label: "6.5 – 25.0 mm",  cold: "6.5-25.0",  feeder: "6.5-25.0"  },
+  { label: "25.3 – 32.0 mm", cold: "25.3-32.0", feeder: "25.3-32.0" },
+  { label: "32.01 – 40 mm",  cold: "32.01-40",  feeder: "32.01-40"  },
+  { label: "40.01 – 50.6 mm",cold: "40.01-50.6",feeder: "40.01-50.6"},
+  { label: "50.61 – 62.2 mm",cold: "50.61-62.2",feeder: "50.61-62.2"},
+  { label: "62.21 – 79 mm",  cold: "62.21-79",  feeder: "62.21-79"  },
+  { label: "79.01 – 90 mm",  cold: "79.01-90",  feeder: "79.01-90"  },
+];
+
+// H/V Mill grooves per section
+// Format: { standId: grooveNo | "×" }
+// Read from updated chart (image provided)
+const HV_GROOVES = {
+  "5.5-6.0": {
+    billet: "SQ200×6000 (2065 kg)", bdm: "140×115",
+    "2H":"113","3V":"114","4H":"115","5V":"116","6H":"117","7V":"118",
+    "8H":"105","9V":"125","10H":"105","11V":"126","12H":"109","13V":"127"
+  },
+  "6.5-25.0": {
+    billet: "SQ200×6000 (2065 kg)", bdm: "140×115",
+    "2H":"113","3V":"114","4H":"115","5V":"116","6H":"117","7V":"118",
+    "8H":"105","9V":"106","10H":"107","11V":"108","12H":"109","13V":"110"
+  },
+  "25.3-32.0": {
+    billet: "SQ200×6000 (2065 kg)", bdm: "140×115",
+    "2H":"113","3V":"114","4H":"115","5V":"116","6H":"117","7V":"118",
+    "8H":"×","9V":"×","10H":"×","11V":"×","12H":"×","13V":"×"
+  },
+  "32.01-40": {
+    billet: "SQ200×6000 (2065 kg)", bdm: "140×115",
+    "2H":"113","3V":"114","4H":"115","5V":"116","6H":"117","7V":"×",
+    "8H":"×","9V":"×","10H":"×","11V":"×","12H":"×","13V":"×"
+  },
+  "40.01-50.6": {
+    billet: "RECT240×200×6000 (2203 kg)", bdm: "140×115",
+    "2H":"113","3V":"114","4H":"115","5V":"116","6H":"×","7V":"116",
+    "8H":"×","9V":"×","10H":"×","11V":"×","12H":"×","13V":"×"
+  },
+  "50.61-62.2": {
+    billet: "SQ300×5300/6000 (3649-4131 kg)", bdm: "175×140",
+    "2H":"119","3V":"120","4H":"121","5V":"122","6H":"×","7V":"116",
+    "8H":"×","9V":"×","10H":"×","11V":"×","12H":"×","13V":"×"
+  },
+  "62.21-79": {
+    billet: "SQ300×5300/6000 (3649-4131 kg)", bdm: "175×140",
+    "2H":"119","3V":"120","4H":"121","5V":"122","6H":"123","7V":"124",
+    "8H":"×","9V":"×","10H":"×","11V":"×","12H":"×","13V":"×"
+  },
+  "79.01-90": {
+    billet: "SQ300×5300/6000 (3649-4131 kg)", bdm: "175×140",
+    "2H":"119","3V":"120","4H":"121","5V":"122","6H":"×","7V":"122",
+    "8H":"×","9V":"×","10H":"×","11V":"×","12H":"×","13V":"×"
+  },
+};
+
+// HV Stands in order
+const HV_STANDS = [
+  {id:"2H",  sec:"GCC 5543", orient:"H"},
+  {id:"3V",  sec:"GCC 5543", orient:"V"},
+  {id:"4H",  sec:"GCC 5543", orient:"H"},
+  {id:"5V",  sec:"GCC 5543", orient:"V"},
+  {id:"6H",  sec:"GCC 5543", orient:"H"},
+  {id:"7V",  sec:"GCC 5543", orient:"V"},
+  {id:"8H",  sec:"GCC 4334", orient:"H"},
+  {id:"9V",  sec:"GCC 4334", orient:"V"},
+  {id:"10H", sec:"GCC 4334", orient:"H"},
+  {id:"11V", sec:"GCC 4334", orient:"V"},
+  {id:"12H", sec:"GCC 4334", orient:"H"},
+  {id:"13V", sec:"GCC 4334", orient:"V"},
+];
+
+// Kocks FSR data — same as before, keyed by feeder cold range
+// Each feeder range maps to ONE Kocks path (the matching one)
+const KOCKS_FOR_FEEDER = {
+  "5.5-6.0":    { entry:22.8,  s1:"-",      s1g:"-",     s2:"223-1", s2g:"321-1", s3:"323-1", s3g:"421-1", s4:"423-1", s4g:"(-)",   s5:"523-1", s5g:"-"    },
+  "6.5-25.0":   { entry:22.8,  s1:"-",      s1g:"-",     s2:"223-1", s2g:"321-1", s3:"323-1", s3g:"421-1", s4:"423-2", s4g:"(-)",   s5:"523-2", s5g:"-"    },
+  "25.3-32.0":  { entry:28.8,  s1:"-",      s1g:"-",     s2:"223-2", s2g:"322-1", s3:"323-3", s3g:"422-1", s4:"423-4", s4g:"522-1", s5:"523-3", s5g:"-"    },
+  "32.01-40":   { entry:36.4,  s1:"-",      s1g:"-",     s2:"223-3", s2g:"322-2", s3:"323-5", s3g:"422-3", s4:"423-7", s4g:"522-3", s5:"523-5", s5g:"-"    },
+  "40.01-50.6": { entry:46.1,  s1:"-",      s1g:"-",     s2:"223-4", s2g:"322-3", s3:"323-7", s3g:"422-5", s4:"423-10",s4g:"522-5", s5:"523-7", s5g:"-"    },
+  "50.61-62.2": { entry:57.5,  s1:"-",      s1g:"-",     s2:"223-5", s2g:"322-4", s3:"323-9", s3g:"422-7", s4:"423-13",s4g:"522-7", s5:"523-9", s5g:"-"    },
+  "62.21-79":   { entry:68.5,  s1:"-",      s1g:"-",     s2:"223-7", s2g:"322-6", s3:"323-12",s3g:"422-10",s4:"423-17",s4g:"522-10",s5:"523-12",s5g:"-"    },
+  "79.01-90":   { entry:87.0,  s1:"-",      s1g:"-",     s2:"223-9", s2g:"(-)",   s3:"323-15",s3g:"422-13",s4:"423-21",s4g:"522-13",s5:"523-15",s5g:"-"    },
+};
+
+const KOCKS_STANDS = ["s1","s2","s3","s4","s5"];
+const KOCKS_STAND_LABELS = ["St.1","St.2","St.3","St.4","St.5"];
+
+// ════════════════════════════════════════════════════════════════════════════
+// SUPABASE HELPERS
+// ════════════════════════════════════════════════════════════════════════════
+async function sbFetch(path, method="GET", body=null) {
+  const opts = {
+    method,
+    headers: {
+      "apikey": SUPA_KEY,
+      "Authorization": "Bearer " + SUPA_KEY,
+      "Content-Type": "application/json",
+      "Prefer": "return=representation"
+    }
+  };
+  if(body) opts.body = JSON.stringify(body);
+  const res = await fetch(SUPA_URL + path, opts);
+  const text = await res.text();
+  try { return { ok: res.ok, data: JSON.parse(text), status: res.status }; }
+  catch { return { ok: res.ok, data: text, status: res.status }; }
+}
+
+// Simple hash for PIN (not cryptographic but sufficient for this use)
+async function hashPin(pin) {
+  const enc = new TextEncoder();
+  const buf = await crypto.subtle.digest("SHA-256", enc.encode(pin + "TSLP_SALT_2024"));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+}
+
+function genToken() {
+  return Array.from(crypto.getRandomValues(new Uint8Array(32)))
+    .map(b => b.toString(16).padStart(2,"0")).join("");
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// AUTH
+// ════════════════════════════════════════════════════════════════════════════
+let currentUser = null;
+
+async function doLogin() {
+  const phone = document.getElementById("loginPhone").value.trim();
+  const pin = ["p0","p1","p2","p3"].map(id => document.getElementById(id).value).join("");
+  const err = document.getElementById("loginErr");
+  const load = document.getElementById("loginLoad");
+
+  err.style.display = "none";
+  if(!phone || pin.length !== 4) {
+    err.textContent = "Enter phone number and 4-digit PIN.";
+    err.style.display = "block"; return;
+  }
+
+  // Check if admin
+  if(ADMINS.includes(phone)) {
+    // Admin: check against Supabase or use hardcoded initial PIN
+    load.style.display = "block";
+    try {
+      const hashed = await hashPin(pin);
+      const r = await sbFetch(`/rest/v1/users?phone=eq.${encodeURIComponent(phone)}&select=*`);
+      load.style.display = "none";
+
+      if(r.ok && r.data.length > 0) {
+        const user = r.data[0];
+        if(!user.is_active) { err.textContent = "Account disabled."; err.style.display="block"; return; }
+        if(user.pin !== hashed) { err.textContent = "Incorrect PIN."; err.style.display="block"; return; }
+        await createSession(phone);
+        currentUser = { phone, role: "admin", name: user.name };
+        showAdmin();
+      } else {
+        // First time admin login — PIN is last 4 digits of phone
+        const defaultPin = phone.slice(-4);
+        if(pin !== defaultPin) {
+          err.textContent = `Admin not registered yet. Default PIN is last 4 digits of your number (${defaultPin}). Use admin setup to set a new PIN.`;
+          err.style.display = "block"; return;
+        }
+        // Create admin user with default PIN
+        const hDefault = await hashPin(defaultPin);
+        await sbFetch("/rest/v1/users", "POST", { phone, pin: hDefault, name: "Admin", is_active: true });
+        await createSession(phone);
+        currentUser = { phone, role: "admin", name: "Admin" };
+        showAdmin();
+      }
+    } catch(e) {
+      load.style.display = "none";
+      err.textContent = "Connection error. Check internet."; err.style.display="block";
+    }
+    return;
+  }
+
+  // Regular employee
+  load.style.display = "block";
+  try {
+    const hashed = await hashPin(pin);
+    const r = await sbFetch(`/rest/v1/users?phone=eq.${encodeURIComponent(phone)}&select=*`);
+    load.style.display = "none";
+
+    if(!r.ok || r.data.length === 0) {
+      err.textContent = "Phone number not registered. Contact your admin."; err.style.display="block"; return;
+    }
+    const user = r.data[0];
+    if(!user.is_active) { err.textContent = "Your access has been disabled. Contact admin."; err.style.display="block"; return; }
+    if(user.pin !== hashed) { err.textContent = "Incorrect PIN."; err.style.display="block"; return; }
+
+    await createSession(phone);
+    currentUser = { phone, role: "employee", name: user.name };
+    showEmployee();
+  } catch(e) {
+    load.style.display = "none";
+    err.textContent = "Connection error. Check internet."; err.style.display="block";
+  }
+}
+
+async function createSession(phone) {
+  const token = genToken();
+  await sbFetch("/rest/v1/sessions", "POST", { phone, token });
+  localStorage.setItem("crpg_token", token);
+  localStorage.setItem("crpg_phone", phone);
+}
+
+async function doLogout() {
+  const token = localStorage.getItem("crpg_token");
+  if(token) await sbFetch(`/rest/v1/sessions?token=eq.${token}`, "DELETE");
+  localStorage.removeItem("crpg_token");
+  localStorage.removeItem("crpg_phone");
+  currentUser = null;
+  showView("viewLogin");
+  clearLoginForm();
+}
+
+function clearLoginForm() {
+  document.getElementById("loginPhone").value = "";
+  ["p0","p1","p2","p3"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("loginErr").style.display = "none";
+}
+
+// Auto-restore session
+async function tryRestoreSession() {
+  const token = localStorage.getItem("crpg_token");
+  const phone = localStorage.getItem("crpg_phone");
+  if(!token || !phone) return;
+  try {
+    const r = await sbFetch(`/rest/v1/sessions?token=eq.${token}&select=*`);
+    if(!r.ok || r.data.length === 0) { localStorage.removeItem("crpg_token"); return; }
+    const sess = r.data[0];
+    if(new Date(sess.expires_at) < new Date()) {
+      await sbFetch(`/rest/v1/sessions?token=eq.${token}`, "DELETE");
+      localStorage.removeItem("crpg_token"); return;
+    }
+    const ur = await sbFetch(`/rest/v1/users?phone=eq.${encodeURIComponent(phone)}&select=*`);
+    if(!ur.ok || ur.data.length === 0) return;
+    const user = ur.data[0];
+    if(!user.is_active) return;
+    currentUser = { phone, role: ADMINS.includes(phone) ? "admin" : "employee", name: user.name };
+    if(currentUser.role === "admin") showAdmin();
+    else showEmployee();
+  } catch(e) { /* stay on login */ }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// VIEWS
+// ════════════════════════════════════════════════════════════════════════════
+function showView(id) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function showAdmin() {
+  showView("viewAdmin");
+  document.getElementById("adminPhone").textContent = currentUser.phone;
+  loadUserList();
+}
+
+function showEmployee() {
+  showView("viewEmployee");
+  document.getElementById("empPhone").textContent = currentUser.name || currentUser.phone;
+  buildSectionSelects();
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// ADMIN FUNCTIONS
+// ════════════════════════════════════════════════════════════════════════════
+async function loadUserList() {
+  const list = document.getElementById("userList");
+  list.innerHTML = '<div style="color:var(--textm);font-size:13px;text-align:center;padding:20px;">Loading...</div>';
+  try {
+    const r = await sbFetch("/rest/v1/users?select=*&order=created_at.asc");
+    if(!r.ok) { list.innerHTML = '<div style="color:var(--red);padding:12px;">Error loading users.</div>'; return; }
+    if(r.data.length === 0) { list.innerHTML = '<div style="color:var(--textm);font-size:13px;padding:12px;">No users yet.</div>'; return; }
+    list.innerHTML = r.data.map(u => `
+      <div class="user-row">
+        <div>
+          <div class="user-phone">${u.phone}</div>
+          <div class="user-name">${u.name || "—"}</div>
+        </div>
+        <span class="user-active ${u.is_active ? 'ua-yes' : 'ua-no'}">${u.is_active ? "Active" : "Disabled"}</span>
+        <div class="user-actions">
+          <button class="btn-toggle" onclick="toggleUser('${u.phone}', ${u.is_active})">
+            ${u.is_active ? "Disable" : "Enable"}
+          </button>
+          ${!ADMINS.includes(u.phone) ? `<button class="btn-danger" onclick="deleteUser('${u.phone}')">Remove</button>` : ""}
+        </div>
+      </div>
+    `).join("");
+  } catch(e) {
+    list.innerHTML = '<div style="color:var(--red);padding:12px;">Connection error.</div>';
+  }
+}
+
+async function addUser() {
+  const phone = document.getElementById("addPhone").value.trim();
+  const name  = document.getElementById("addName").value.trim();
+  const pin   = document.getElementById("addPin").value.trim();
+  const succ  = document.getElementById("addSuccess");
+  const err   = document.getElementById("addErr");
+  succ.style.display = err.style.display = "none";
+
+  if(!phone || pin.length !== 4) {
+    err.textContent = "Phone and 4-digit PIN required."; err.style.display="block"; return;
+  }
+  try {
+    const hashed = await hashPin(pin);
+    const r = await sbFetch("/rest/v1/users", "POST", { phone, pin: hashed, name: name || null, is_active: true });
+    if(!r.ok) {
+      err.textContent = r.data?.message || "Error adding user (may already exist)."; err.style.display="block"; return;
+    }
+    succ.textContent = `User ${phone} added successfully.`; succ.style.display="block";
+    document.getElementById("addPhone").value = "";
+    document.getElementById("addName").value  = "";
+    document.getElementById("addPin").value   = "";
+    loadUserList();
+  } catch(e) {
+    err.textContent = "Connection error."; err.style.display="block";
+  }
+}
+
+async function toggleUser(phone, currentActive) {
+  try {
+    await sbFetch(`/rest/v1/users?phone=eq.${encodeURIComponent(phone)}`, "PATCH", { is_active: !currentActive });
+    loadUserList();
+  } catch(e) { alert("Error toggling user."); }
+}
+
+async function deleteUser(phone) {
+  if(!confirm(`Remove user ${phone}? They will lose access.`)) return;
+  try {
+    await sbFetch(`/rest/v1/users?phone=eq.${encodeURIComponent(phone)}`, "DELETE");
+    loadUserList();
+  } catch(e) { alert("Error removing user."); }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// EMPLOYEE — SECTION SELECTS
+// ════════════════════════════════════════════════════════════════════════════
+function buildSectionSelects() {
+  const from = document.getElementById("fromSection");
+  const to   = document.getElementById("toSection");
+  const opts = SECTIONS.map(s => `<option value="${s.cold}">${s.label}</option>`).join("");
+  from.innerHTML = `<option value="">Select current section</option>${opts}`;
+  to.innerHTML   = `<option value="">Select upcoming section</option>${opts}`;
+}
+
+function resetEmp() {
+  document.getElementById("fromSection").value = "";
+  document.getElementById("toSection").value   = "";
+  document.getElementById("empResults").style.display = "none";
+  document.getElementById("empResults").innerHTML = "";
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// GROOVE CHANGE LOGIC
+// ════════════════════════════════════════════════════════════════════════════
+function showGrooveChange() {
+  const fromKey = document.getElementById("fromSection").value;
+  const toKey   = document.getElementById("toSection").value;
+  const results = document.getElementById("empResults");
+
+  if(!fromKey || !toKey) { alert("Please select both sections."); return; }
+  if(fromKey === toKey)  { alert("Current and upcoming sections are the same."); return; }
+
+  const fromHV  = HV_GROOVES[fromKey];
+  const toHV    = HV_GROOVES[toKey];
+  const fromK   = KOCKS_FOR_FEEDER[fromKey];
+  const toK     = KOCKS_FOR_FEEDER[toKey];
+  const fromLbl = SECTIONS.find(s => s.cold === fromKey).label;
+  const toLbl   = SECTIONS.find(s => s.cold === toKey).label;
+
+  // Count changes
+  let hvSame=0, hvChange=0, hvBypass=0;
+  HV_STANDS.forEach(st => {
+    const fg = fromHV[st.id], tg = toHV[st.id];
+    if(fg === "×" && tg === "×") hvBypass++;
+    else if(fg === tg) hvSame++;
+    else hvChange++;
+  });
+
+  // Kocks changes
+  let kSame=0, kChange=0, kBypass=0;
+  KOCKS_STANDS.forEach(pos => {
+    const fr = fromK[pos], tr = toK[pos];
+    if(fr === "-" && tr === "-") kBypass++;
+    else if(fr === tr) kSame++;
+    else kChange++;
+  });
+
+  // Build HTML
+  let html = `
+    <!-- Banner -->
+    <div class="result-banner">
+      <div class="rb-from">
+        <div class="rb-lbl">Current Section</div>
+        <div class="rb-val">${fromLbl}</div>
+        <div class="rb-sub">${fromHV.billet}</div>
+      </div>
+      <div class="rb-arrow">⟶</div>
+      <div class="rb-to">
+        <div class="rb-lbl">Upcoming Section</div>
+        <div class="rb-val" style="color:var(--amber);">${toLbl}</div>
+        <div class="rb-sub">${toHV.billet}</div>
+      </div>
+    </div>
+
+    <!-- Summary chips -->
+    <div class="summary-row">
+      <div class="sum-chip change">
+        <div class="sum-chip-lbl">🔴 Grooves to Change</div>
+        <div class="sum-chip-val">${hvChange + kChange}</div>
+      </div>
+      <div class="sum-chip same">
+        <div class="sum-chip-lbl">🟢 Grooves Same</div>
+        <div class="sum-chip-val">${hvSame + kSame}</div>
+      </div>
+      <div class="sum-chip bypass">
+        <div class="sum-chip-lbl">⚫ Bypassed Both</div>
+        <div class="sum-chip-val">${hvBypass + kBypass}</div>
+      </div>
+    </div>
+
+    <!-- BDM -->
+    <div style="background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:14px;">
+      <div style="font-size:11px;color:var(--textd);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">BDM — Stand 1H</div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:9px;color:var(--textd);">Current</div>
+          <div style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--textd);">${fromHV.bdm}</div>
+        </div>
+        <div style="color:var(--amber);font-size:16px;">→</div>
+        <div>
+          <div style="font-size:9px;color:var(--textd);">Upcoming</div>
+          <div style="font-family:var(--mono);font-size:14px;font-weight:700;color:${fromHV.bdm===toHV.bdm?'var(--green)':'var(--amber)'};">${toHV.bdm}</div>
+        </div>
+        <span class="${fromHV.bdm===toHV.bdm?'tag-same':'tag-change'}">${fromHV.bdm===toHV.bdm?'SAME':'CHANGE'}</span>
+      </div>
+    </div>
+
+    <!-- HV Mill table -->
+    <div class="stands-section">
+      <div class="stands-hdr hv">
+        <div>
+          <div class="stands-hdr-title">H/V Mill — Stands 2H to 13V</div>
+        </div>
+        <div class="stands-hdr-sub">${hvChange} change${hvChange!==1?'s':''} · ${hvSame} same · ${hvBypass} bypassed</div>
+      </div>
+      <table class="stands-table">
+        <thead>
+          <tr>
+            <th>Stand</th><th>Section</th><th>Orient</th>
+            <th>Current Groove</th><th></th><th>Upcoming Groove</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${HV_STANDS.map(st => {
+            const fg = fromHV[st.id], tg = toHV[st.id];
+            const bothBypass = fg==="×" && tg==="×";
+            const same = fg === tg;
+            const rowCls = bothBypass ? "row-bypass" : same ? "row-same" : "row-change";
+            const tag = bothBypass
+              ? '<span class="tag-bypass">BYPASS</span>'
+              : same
+                ? '<span class="tag-same">SAME</span>'
+                : '<span class="tag-change">CHANGE</span>';
+            return `<tr class="${rowCls}">
+              <td><b>${st.id}</b></td>
+              <td style="font-size:10px;color:var(--textd);">${st.sec}</td>
+              <td>${st.orient}</td>
+              <td class="groove-from">${fg==="×"?"— bypass":fg}</td>
+              <td class="groove-arr">${bothBypass?"":same?"":"→"}</td>
+              <td class="groove-to" style="color:${same?'var(--green)':'var(--amber)'};">${tg==="×"?"— bypass":tg}</td>
+              <td>${tag}</td>
+            </tr>`;
+          }).join("")}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Kocks table -->
+    <div class="kocks-section">
+      <div class="stands-hdr kocks">
+        <div>
+          <div class="stands-hdr-title">Kocks RSB 370/4(5) — Stands 1 to 5</div>
+        </div>
+        <div class="stands-hdr-sub">${kChange} change${kChange!==1?'s':''} · ${kSame} same · ${kBypass} bypassed</div>
+      </div>
+      <table class="stands-table">
+        <thead>
+          <tr>
+            <th>Stand</th>
+            <th>Current Roll Set</th><th>Current Guide</th>
+            <th></th>
+            <th>Upcoming Roll Set</th><th>Upcoming Guide</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${KOCKS_STANDS.map((pos, i) => {
+            const fr = fromK[pos], frg = fromK[pos+"g"];
+            const tr2 = toK[pos],  trg = toK[pos+"g"];
+            const bothBypass = fr==="-" && tr2==="-";
+            const rollSame = fr===tr2;
+            const guideSame = frg===trg;
+            const same = rollSame && guideSame;
+            const rowCls = bothBypass ? "row-bypass" : same ? "row-same" : "row-change";
+            const tag = bothBypass
+              ? '<span class="tag-bypass">BYPASS</span>'
+              : same
+                ? '<span class="tag-same">SAME</span>'
+                : '<span class="tag-change">CHANGE</span>';
+            const frd = fr==="-"?"— bypass":fr;
+            const frgd = frg==="-"?"—":frg;
+            const trd = tr2==="-"?"— bypass":tr2;
+            const trgd = trg==="-"?"—":trg;
+            return `<tr class="${rowCls}">
+              <td><b>${KOCKS_STAND_LABELS[i]}</b></td>
+              <td class="groove-from">${frd}</td>
+              <td class="groove-from" style="color:var(--purp);font-size:11px;">${frgd}</td>
+              <td class="groove-arr">${bothBypass?"":same?"":"→"}</td>
+              <td class="groove-to" style="color:${rollSame?'var(--green)':'var(--amber)'};">${trd}</td>
+              <td style="color:${guideSame?'var(--green)':'var(--amber)'};font-family:var(--mono);font-size:11px;">${trgd}</td>
+              <td>${tag}</td>
+            </tr>`;
+          }).join("")}
+        </tbody>
+      </table>
+
+      <!-- Kocks entry change note -->
+      <div style="background:var(--surf2);border:1px solid var(--border);border-radius:0 0 10px 10px;border-top:none;padding:10px 14px;font-size:11px;color:var(--textd);">
+        Kocks Entry: 
+        <span style="font-family:var(--mono);color:var(--textd);">ø${fromK.entry}mm</span>
+        ${fromK.entry !== toK.entry ? `<span style="color:var(--amber);"> → ø${toK.entry}mm</span> <span class="tag-change">ENTRY CHANGES</span>` : `<span class="tag-same">SAME ENTRY</span>`}
+        &nbsp;·&nbsp; Roll Width: 90mm
+      </div>
+    </div>
+  `;
+
+  results.innerHTML = html;
+  results.style.display = "block";
+  results.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// PIN BOX AUTO-ADVANCE
+// ════════════════════════════════════════════════════════════════════════════
+["p0","p1","p2","p3"].forEach((id, i) => {
+  document.getElementById(id).addEventListener("input", e => {
+    if(e.target.value.length === 1 && i < 3) {
+      document.getElementById(`p${i+1}`).focus();
+    }
+    if(i === 3 && e.target.value.length === 1) doLogin();
+  });
+  document.getElementById(id).addEventListener("keydown", e => {
+    if(e.key === "Backspace" && !e.target.value && i > 0) {
+      document.getElementById(`p${i-1}`).focus();
+    }
+  });
+});
+document.getElementById("loginPhone").addEventListener("keydown", e => {
+  if(e.key === "Enter") document.getElementById("p0").focus();
+});
+
+// ════════════════════════════════════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════════════════════════════════════
+// Small delay so UI renders before async session check
+setTimeout(tryRestoreSession, 100);
+</script>
+</body>
+</html>
+
